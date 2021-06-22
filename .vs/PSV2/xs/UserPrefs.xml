@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{BC21F9C6-7F92-47C3-9570-FF6451FEDD8A}|Default">
+  <MonoDevelop.Ide.ItemProperties.PSV2 FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.PSV2-test FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PSV2-test/VisitTest.cs">
+    <Files>
+      <File FileName="PSV2-test/AppointmentTest.cs" Line="22" Column="44" />
+      <File FileName="PSV2-test/DrugTest.cs" Line="18" Column="1" />
+      <File FileName="PSV2-test/FeedbackTest.cs" Line="14" Column="1" />
+      <File FileName="PSV2-test/RecepieTest.cs" Line="16" Column="1" />
+      <File FileName="PSV2-test/UserTest.cs" Line="18" Column="1" />
+      <File FileName="PSV2-test/VisitTest.cs" Line="9" Column="20" />
+      <File FileName="PSV2-test/UnitTest1.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="PSV2" expanded="True">
+            <Node name="PSV2" expanded="True" />
+            <Node name="PSV2-test" expanded="True">
+              <Node name="VisitTest.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

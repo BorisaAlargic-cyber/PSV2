@@ -9,7 +9,7 @@ namespace PSV2_test
         [TestMethod]
         public void GetAllVisits()
         {
-            
+            Assert.IsTrue(false);
         }
     }
 }

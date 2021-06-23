@@ -7,27 +7,27 @@ namespace PSV2_test
     public class DrugTest
     {
         [TestMethod]
-        public void AddDrug(Drugs input)
+        public void AddDrug(object input)
         {
-
+            Assert.IsTrue(false);
         }
 
         [TestMethod]
         public void DeleteById(int id)
         {
-
+            Assert.IsTrue(false);
         }
 
         [TestMethod]
         public void GetById(int id)
         {
-
+            Assert.IsTrue(false);
         }
 
         [TestMethod]
         public void GetAllDrugs()
         {
-
+            Assert.IsTrue(false);
         }
     }
 }

@@ -1,24 +1,41 @@
 ﻿<Properties StartupConfiguration="{BC21F9C6-7F92-47C3-9570-FF6451FEDD8A}|Default">
-  <MonoDevelop.Ide.ItemProperties.PSV2 FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.PSV2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.ItemProperties.PSV2-test FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PSV2-test/VisitTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PSV2/appsettings.Development.json">
     <Files>
-      <File FileName="PSV2-test/AppointmentTest.cs" Line="22" Column="44" />
-      <File FileName="PSV2-test/DrugTest.cs" Line="18" Column="1" />
-      <File FileName="PSV2-test/FeedbackTest.cs" Line="14" Column="1" />
-      <File FileName="PSV2-test/RecepieTest.cs" Line="16" Column="1" />
-      <File FileName="PSV2-test/UserTest.cs" Line="18" Column="1" />
-      <File FileName="PSV2-test/VisitTest.cs" Line="9" Column="20" />
-      <File FileName="PSV2-test/UnitTest1.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Model/ModelContext.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Configuration/ProjectConfiguration.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Configuration/IPProjectConfiguration.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Repository/UnitOfWork.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Repository/Repository.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Startup.cs" Line="52" Column="41" />
+      <File FileName="PSV2/Migrations/20210623070959_Init.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Model/ApointmentSearch.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/ApointmentController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/DefaultController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/DrugController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/FeedbackController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/RecepieController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/TokenController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/UserController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/Controllers/VisitController.cs" Line="1" Column="1" />
+      <File FileName="PSV2/appsettings.Development.json" Line="11" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="PSV2" expanded="True">
-            <Node name="PSV2" expanded="True" />
-            <Node name="PSV2-test" expanded="True">
-              <Node name="VisitTest.cs" selected="True" />
+            <Node name="PSV2" expanded="True">
+              <Node name="Configuration" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Model" expanded="True" />
+              <Node name="Repository" expanded="True" />
+              <Node name="appsettings.json" expanded="True">
+                <Node name="appsettings.Development.json" selected="True" />
+              </Node>
             </Node>
+            <Node name="PSV2-test" expanded="True" />
           </Node>
         </State>
       </Pad>

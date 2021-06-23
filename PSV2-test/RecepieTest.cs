@@ -9,13 +9,13 @@ namespace PSV2_test
         [TestMethod]
         public void GetById(int id)
         {
-
+            Assert.IsTrue(false);
         }
 
         [TestMethod]
         public void GetAllRecepies()
         {
-
+            Assert.IsTrue(false);
         }
     }
 }

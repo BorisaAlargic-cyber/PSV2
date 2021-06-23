@@ -1,0 +1,73 @@
+<div id="apointment-page">
+    <div class="table-container">
+        <div>
+            <form [formGroup]="searchAppointmentForm" (submit)="submit()">
+                
+                <div style="margin-bottom: 20px;">
+                    <select formControlName="doctor">
+                        <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+                          {{ doctor.firstName }} {{ doctor.lastName }}
+                        </option>
+                      </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <select formControlName="urgent">
+                        <option value="Date"></option>
+                        <option value="Doctor"></option>
+                      </select>
+                </div>
+                
+                
+                <mat-form-field class="form-field" appearance="outline">
+                    <input matInput [ngxMatDatetimePicker]="pickerFrom" placeholder="Choose a date" formControlName="dateFrom"
+                        >
+                    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #pickerFrom>
+                    </ngx-mat-datetime-picker>
+                </mat-form-field>  
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <input matInput [ngxMatDatetimePicker]="pickerTo" placeholder="Choose a date" formControlName="dateTo"
+                        >
+                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #pickerTo>
+                    </ngx-mat-datetime-picker>
+                </mat-form-field>  
+            </form>
+        </div>
+        <button (click)="searchOnClick()" mat-raised-button color="primary">Search</button>
+        <table mat-table [dataSource]="elements" class="mat-elevation-z8">
+           
+            <ng-container matColumnDef="patient">
+                <th mat-header-cell *matHeaderCellDef> Paitent </th>
+                <td mat-cell *matCellDef="let element"> {{ element.patient ? element.patient.firstName + " " + element.patient.lastName : '' }} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef = "doctor">
+                <th mat-header-cell *matHeaderCellDef>Doctor</th>
+                <td mat-cell *matCellDef="let element">{{ element.doctor ? element.doctor.firstName + " " + element.doctor.lastName : '' }}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="taken">
+                <th mat-header-cell *matHeaderCellDef> Taken </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-card-actions>
+                        <button *ngIf = "element.taken == false" (click)="takeApointment($event, element)" mat-raised-button  color="primary">Take</button>
+                        <button *ngIf = "element.taken == true" (click)="leaveApointment($event, element)" mat-raised-button  color="primary">Leave</button>
+                    </mat-card-actions>   
+                </td>
+                
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
+

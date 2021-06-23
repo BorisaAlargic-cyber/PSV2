@@ -1,0 +1,48 @@
+<div id="registration-page" class="page">
+    <div class="form-container">
+        <mat-card>
+            <h1>Registration</h1>
+            <form [formGroup]="registrationForm" (submit)="submit()">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> First Name
+                    </mat-label>
+                    <input matInput formControlName="firstName" required>
+                    <mat-error *ngIf="registrationForm.controls.firstName.touched && registrationForm.controls.firstName.invalid">
+                    <span *ngIf="registrationForm.controls.firstName.errors.required">This field is mandatory.</span>
+                    <span *ngIf="registrationForm.controls.firstName.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Last Name
+                    </mat-label>
+                    <input matInput formControlName="lastName" required>
+                    <mat-error *ngIf="registrationForm.controls.lastName.touched && registrationForm.controls.lastName.invalid">
+                    <span *ngIf="registrationForm.controls.lastName.errors.required">This field is mandatory.</span>
+                    <span *ngIf="registrationForm.controls.lastName.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> E-mail
+                    </mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="registrationForm.controls.email.touched && registrationForm.controls.email.invalid">
+                    <span *ngIf="registrationForm.controls.email.errors.required">This field is mandatory.</span>
+                    <span *ngIf="registrationForm.controls.email.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Password
+                    </mat-label>
+                    <input matInput formControlName="password" type="password" required>
+                    <mat-error *ngIf="registrationForm.controls.password.touched && registrationForm.controls.password.invalid">
+                    <span *ngIf="registrationForm.controls.password.errors.required">This field is mandatory.</span>
+                    <span *ngIf="registrationForm.controls.password.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>
+            </form>
+            <mat-card-actions>
+                <button (click)="submit()" mat-raised-button type="submit" color="primary">REGISTRATION</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

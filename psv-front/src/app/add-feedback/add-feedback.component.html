@@ -1,0 +1,21 @@
+<div id="add-feedback-page" class="page">
+    <div class="form-container">
+        <mat-card>
+            <h1>Feedback</h1>
+            <form [formGroup]="addFeedbackForm" (submit)="submit()">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Feedback
+                    </mat-label>
+                    <input matInput formControlName="comment" required>
+                    <mat-error *ngIf="addFeedbackForm.controls.comment.touched && addFeedbackForm.controls.comment.invalid">
+                    <span *ngIf="addFeedbackForm.controls.comment.errors.required">This field is mandatory.</span>
+                    <span *ngIf="addFeedbackForm.controls.comment.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                </mat-form-field>          
+            </form>
+            <mat-card-actions>
+                <button mat-raised-button type="submit" color="primary" (click)="submit()">ADD FEEDBACK</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

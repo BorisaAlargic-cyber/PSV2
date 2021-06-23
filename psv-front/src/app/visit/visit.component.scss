@@ -1,0 +1,12 @@
+#visit-page {
+    min-height: calc(100vh - 200px);
+    padding: 100px 0;
+
+    .table-container {
+        
+        table {
+            margin: 0 auto;
+            min-width: 60%;
+        }
+    }
+}

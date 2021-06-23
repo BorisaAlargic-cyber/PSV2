@@ -1,0 +1,13 @@
+#login-page {
+    min-height: calc(100vh - 200px);
+    padding: 100px 0;
+
+    .form-container {
+        width: 60%;
+        margin: 0 auto;;
+    
+        .mat-form-field {
+            width: 100%;
+        }
+    }
+}

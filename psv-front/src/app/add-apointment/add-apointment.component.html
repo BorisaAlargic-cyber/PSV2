@@ -1,0 +1,30 @@
+<div id="add-appointment" class="page">
+    <div class="form-container">
+        <mat-card>
+            <h1>Add appointment</h1>
+            <form [formGroup]="addAppointmentForm" (submit)="submit()">
+                
+                <div style="margin-bottom: 20px;">
+                    <select formControlName="doctor">
+                        <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+                          {{ doctor.firstName }} {{ doctor.lastName }}
+                        </option>
+                      </select>
+                </div>
+                
+                <mat-form-field class="form-field" appearance="outline">
+                    <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" formControlName="date"
+                        >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #picker>
+                    </ngx-mat-datetime-picker>
+                </mat-form-field>  
+                
+                
+            </form>
+            <mat-card-actions>
+                <button mat-raised-button type="submit" color="primary" (click)="submit()">ADD DRUG</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="chose-doctor-page" class="page">
+    <div class="form-container">
+        <mat-card>
+            <h1>Chose your doctor</h1>
+            <form [formGroup]="choseDoctorForm" (submit)="submit()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Doctor</mat-label>
+                    <mat-select name='doctor'>
+                        <mat-option *ngFor="let doctor of doctors" value="{{doctor.id}}">
+                            {{doctor.firstName}} {{doctor.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+            <mat-card-actions>
+                <button mat-raised-button type="submit" color="primary" (click)="submit()">Chose doctor</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

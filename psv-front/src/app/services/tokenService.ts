@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class TokenService{
+export class TokenService {
 
-    baseUrl = 'https://localhost:44308';
-  
+    baseUrl = 'https://localhost:5001';
+
     constructor(private http: HttpClient) { }
 
 

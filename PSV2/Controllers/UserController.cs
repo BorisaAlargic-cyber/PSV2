@@ -12,6 +12,34 @@ namespace PSV2.Controllers
     public class UserController : DefaultController
     {
         [Authorize]
+        [Route("/api/users/set-doctor")]
+        [HttpPost]
+        public async Task<IActionResult> SetChosenDoctor(User doctor)
+        {
+            try
+            {
+                using(UnitOfWork unitOfWork = new UnitOfWork(new ModelContext()))
+                {
+                    User user = GetCurrentUser();
+                    unitOfWork.Users.Update(user);
+                    user.ChoosenDoctor = doctor;
+                    unitOfWork.Complete();
+
+                    return Ok(user);
+
+                }
+            }catch(Exception ee)
+            {
+                return null;
+            }
+
+            
+        }
+
+
+
+
+        [Authorize]
         [Route("/api/users/unblock/{id}")]
         [HttpPost]
         public async Task<IActionResult> UnBlock(string id)
@@ -50,13 +78,13 @@ namespace PSV2.Controllers
         [Authorize]
         [Route("/api/users/block/{id}")]
         [HttpPost]
-        public async Task<IActionResult> Block(string id)
+        public async Task<IActionResult> Block(int id)
         {
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ModelContext()))
                 {
-                    User user = unitOfWork.Users.GetUserWithEmail(id);
+                    User user = unitOfWork.Users.Get(id);
 
                     if (user == null)
                     {

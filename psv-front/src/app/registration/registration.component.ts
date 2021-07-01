@@ -33,8 +33,8 @@ export class RegistrationComponent implements OnInit {
     }
 
 
-    this.userService.register(this.registrationForm.value).subscribe((data) =>  {
-      this.router.navigate(['/login']);  
+    this.userService.register(this.registrationForm.value).subscribe((data) => {
+      this.router.navigate(['/login']);
     });
   }
 

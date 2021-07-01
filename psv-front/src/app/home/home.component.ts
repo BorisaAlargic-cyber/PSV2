@@ -12,15 +12,13 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['comment'];
   elements;
 
-  constructor(private feedbackService : FeedBackService) { }
+  constructor(private feedbackService: FeedBackService) { }
 
   ngOnInit(): void {
 
     this.elements = [];
 
-    this.feedbackService.getPublishedFeedback().subscribe(result =>{
-
-      console.log(result);
+    this.feedbackService.getPublishedFeedback().subscribe(result => {
 
       this.elements = result['entities'];
     })

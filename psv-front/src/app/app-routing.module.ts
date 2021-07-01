@@ -5,6 +5,7 @@ import { AddDrugComponent } from './add-drug/add-drug.component';
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { ApointmentListComponent } from './apointment-list/apointment-list.component';
 import { AppComponent } from './app.component';
+import { ChoseDoctorComponent } from './chose-doctor/chose-doctor.component';
 import { DrugListComponent } from './drug-list/drug-list.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { HomeComponent } from './home/home.component';
@@ -20,11 +21,12 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'add-feedback', component: AddFeedbackComponent },
   { path: 'feedback', component: FeedbackComponent },
-  { path: 'users', component: UserListComponent},
-  { path: 'drugs' , component:DrugListComponent},
-  { path: 'add-drug', component:AddDrugComponent},
+  { path: 'users', component: UserListComponent },
+  { path: 'drugs', component: DrugListComponent },
+  { path: 'add-drug', component: AddDrugComponent },
   { path: 'add-appointment', component: AddApointmentComponent },
-  { path: 'apointments',component:ApointmentListComponent}
+  { path: 'apointments', component: ApointmentListComponent },
+  { path: 'chose-doctor', component: ChoseDoctorComponent }
 ];
 
 @NgModule({

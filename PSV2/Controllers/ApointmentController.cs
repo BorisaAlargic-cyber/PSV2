@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,30 @@ namespace PSV2.Controllers
     public class ApointmentController : DefaultController
     {
         [Authorize]
+        [Route("/api/apointment/search-apointment-priorty")]
+        [HttpPost]
+        public List<Apointment> SearchApointmentsWithPriorty(PriorityRequest priority)
+        {
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork(new ModelContext()))
+                {
+                    List<Apointment> apointmentsList = unitOfWork.Apointment.SearchApointmens(priority);
+
+                    return apointmentsList;
+
+                }
+            }
+            catch (Exception ee)
+            {
+                return null;
+            }
+        }
+
+
+
+
+        [Authorize]
         [Route("/api/apointment/pointment-all")]
         [HttpGet]
         public PageResponse<Apointment> GetAll([FromQuery(Name = "page")] int page, [FromQuery(Name = "perPage")] int perPage, [FromQuery(Name = "search")] string search)
@@ -20,6 +45,15 @@ namespace PSV2.Controllers
             {
                 using (var unitOfWork = new UnitOfWork(new ModelContext()))
                 {
+                    User current = GetCurrentUser();
+                    if(current.FirstTime == true)
+                    {
+                        List<Apointment> result = unitOfWork.Apointment.FirstTimeApointments(current);
+
+
+                        return new PageResponse<Apointment>(result, result.Count);
+                    }
+
                     return unitOfWork.Apointment.GetPage(new Pager(page, perPage, search));
                 }
             }
@@ -36,6 +70,7 @@ namespace PSV2.Controllers
 
             apointment = new Apointment();
             apointment.Date = input.Date;
+            
 
             try
             {
@@ -45,13 +80,15 @@ namespace PSV2.Controllers
 
                     unitOfWork.Apointment.Add(apointment);
                     unitOfWork.Complete();
+
+                    return Ok(apointment);
                 }
             }
             catch (Exception e)
             {
                 return BadRequest();
             }
-            return Ok(apointment);
+            
         }
 
         [Route("/api/apointment/leave/{id}")]
@@ -89,7 +126,7 @@ namespace PSV2.Controllers
             {
                 using (var unitOfWork = new UnitOfWork(new ModelContext()))
                 {
-
+                    user.FirstTime = false;
                     apointment = unitOfWork.Apointment.Get(id);
                     apointment.Patient = unitOfWork.Users.Get(user.Id);
                     apointment.Taken = true;

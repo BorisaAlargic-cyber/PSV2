@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PSV2.Core;
 using PSV2.Model;
 
@@ -12,12 +13,12 @@ namespace PSV2.Repository
 
         public User GetUserWithEmail(string email)
         {
-            return ModelContext.Users.Where(x => x.Email == email).FirstOrDefault();
+            return ModelContext.Users.Include(x => x.ChoosenDoctor).Where(x => x.Email == email).FirstOrDefault();
         }
 
         public User GetUserWithEmailAndPassword(string email, string password)
         {
-            return ModelContext.Users.Where(x => x.Email == email && x.Password == password).FirstOrDefault();
+            return ModelContext.Users.Include(x => x.ChoosenDoctor).Where(x => x.Email == email && x.Password == password).FirstOrDefault();
         }
 
         public override PageResponse<User> GetPage(Pager pager)
@@ -29,7 +30,8 @@ namespace PSV2.Repository
 
         public List<User> GetDoctors()
         {
-            var query = ModelContext.Users.Where(x => x.Deleted == false && x.Role == "DOCTOR").OrderBy(x => x.Id);
+            var query = ModelContext.Users.
+                Where(x => x.Deleted == false && x.Role == "DOCTOR").OrderBy(x => x.Id);
 
             return query.ToList();
         }

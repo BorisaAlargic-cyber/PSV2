@@ -27,13 +27,18 @@ import { DrugListComponent } from './drug-list/drug-list.component';
 import { DrugService } from './services/drugService';
 import { AddDrugComponent } from './add-drug/add-drug.component';
 import { AddApointmentComponent } from './add-apointment/add-apointment.component';
-import { NgxMatDatetimePickerModule, NgxMatTimepickerModule,
-   NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import {
+  NgxMatDatetimePickerModule, NgxMatTimepickerModule,
+  NgxMatNativeDateModule
+} from '@angular-material-components/datetime-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ApointmentListComponent } from './apointment-list/apointment-list.component';
 import { HomeComponent } from './home/home.component';
 import { ApointmentService } from './services/apointmentService';
 import { TerminService } from './services/terminService';
+import { ChoseDoctorComponent } from './chose-doctor/chose-doctor.component';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,8 @@ import { TerminService } from './services/terminService';
     AddApointmentComponent,
     ApointmentListComponent,
     HomeComponent,
-    
+    ChoseDoctorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -62,9 +68,10 @@ import { TerminService } from './services/terminService';
     MatTableModule,
     HttpClientModule,
     NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,MatDatepickerModule, NgxMatNativeDateModule,
+    MatSelectModule,
+    NgxMatTimepickerModule, MatDatepickerModule, NgxMatNativeDateModule,
   ],
-  providers: [UserService, TokenService, FeedBackService, VisitService,DrugService,ApointmentService,TerminService,
+  providers: [UserService, TokenService, FeedBackService, VisitService, DrugService, ApointmentService, TerminService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

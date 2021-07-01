@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApointmentService } from '../services/apointmentService';
 import { UserService } from '../services/userService';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,10 +12,10 @@ import { UserService } from '../services/userService';
 })
 export class AddApointmentComponent implements OnInit {
 
-  addAppointmentForm : FormGroup;
-  doctors;
+  addAppointmentForm: FormGroup;
+  doctors: any;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService ,private apointmentService : ApointmentService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private apointmentService: ApointmentService, private router: Router) { }
 
   ngOnInit(): void {
     this.addAppointmentForm = this.formBuilder.group({
@@ -34,16 +35,11 @@ export class AddApointmentComponent implements OnInit {
 
 
   submit() {
-
-    if (!this.addAppointmentForm.valid) {
-      return;
-    }
-
     this.apointmentService.addApointment({
-      doctor: { id: this.addAppointmentForm.value.doctor} ,
+      doctor: { id: parseInt(this.addAppointmentForm.value.doctor) },
       date: this.addAppointmentForm.value.date,
     }).subscribe(data => {
-      
+      this.router.navigate(['/apointments']);
     });
   }
 

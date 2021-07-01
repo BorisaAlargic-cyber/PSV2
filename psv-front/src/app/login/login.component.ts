@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
 
-  constructor(private formBuilder: FormBuilder,private tokenService : TokenService, private router:Router,
-    private userService : UserService) { }
+  constructor(private formBuilder: FormBuilder, private tokenService: TokenService, private router: Router,
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -30,15 +30,28 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-      this.tokenService.token(this.loginForm.value).subscribe((data) =>  {
-        localStorage.setItem('token', JSON.stringify(data));
-        
-        this.userService.getUser().subscribe((data) => {
-          
-          localStorage.setItem('user', JSON.stringify(data));
-          this.router.navigate(['/home']);
-        });
+    this.tokenService.token(this.loginForm.value).subscribe((data) => {
+      localStorage.setItem('token', JSON.stringify(data));
 
-          
+      this.userService.getUser().subscribe((data: any) => {
+
+
+        if (!data.choosenDoctor && data.Role == 'PATIENT') {
+          this.router.navigate(['/chose-doctor']);
+          return;
+        }
+
+        localStorage.setItem('user', JSON.stringify(data));
+        console.log(data, "login");
+
+        this.router.onSameUrlNavigation = 'reload';
+        //this.router.navigate(['/home']);
+
+        window.location.href = '/home'
+
+      });
+
+
     });
-}}
+  }
+}

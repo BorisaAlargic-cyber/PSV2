@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'psv-front';
-  
+
   isLogedIn = false;
   isAdmin = false;
   isDoctor = false;
   isPatient = false;
 
-  constructor( private router:Router) { }
+  constructor(private router: Router) { }
 
   logout() {
 
@@ -28,19 +28,21 @@ export class AppComponent implements OnInit {
 
     let user = JSON.parse(localStorage.getItem('user'));
 
-    if(user) {
+    console.log(user, "app");
+
+    if (user) {
       this.isLogedIn = true;
     }
 
-    if(user && user.role == "ADMIN") {
+    if (user && user.role == "ADMIN") {
       this.isAdmin = true;
     }
 
-    if(user && user.role == "DOCTOR") {
+    if (user && user.role == "DOCTOR") {
       this.isDoctor = true;
     }
 
-    if(user && user.role == "PATIENT") {
+    if (user && user.role == "PATIENT") {
       this.isPatient = true;
     }
   }

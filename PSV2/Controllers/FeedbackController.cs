@@ -110,13 +110,18 @@ namespace PSV2.Controllers
             feedback.Comment = input.Comment;
             feedback.Published = false;
             feedback.Deleted = false;
-            User user = GetCurrentUser();
-            feedback.Patient = user;
+
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ModelContext()))
                 {
                     unitOfWork.Feedback.Add(feedback);
+                    
+
+                    User user = GetCurrentUser();
+                    feedback.Patient = user;
+
+
                     unitOfWork.Complete();
                 }
             }

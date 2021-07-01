@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSV2.Model;
 
 namespace PSV2.Migrations
 {
     [DbContext(typeof(ModelContext))]
-    partial class ModelContextModelSnapshot : ModelSnapshot
+    [Migration("20210630080525_Insturction")]
+    partial class Insturction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,16 +112,18 @@ namespace PSV2.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("PatientId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Speciality")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Taken")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -252,9 +256,15 @@ namespace PSV2.Migrations
 
             modelBuilder.Entity("PSV2.Model.Instruction", b =>
                 {
+                    b.HasOne("PSV2.Model.User", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
                     b.HasOne("PSV2.Model.User", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId");
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("Patient");
                 });

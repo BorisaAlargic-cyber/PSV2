@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
-export class TerminService{
-    
-    baseUrl = 'https://localhost:44308';
+export class TerminService {
+
+    baseUrl = 'https://localhost:5001';
 
     constructor(private http: HttpClient) { }
 

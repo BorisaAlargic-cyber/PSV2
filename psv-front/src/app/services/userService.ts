@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
-    
-    baseUrl = 'https://localhost:44308';
-  
+
+    baseUrl = 'https://localhost:5001';
+
     constructor(private http: HttpClient) { }
 
 
@@ -17,19 +17,23 @@ export class UserService {
         return this.http.get(this.baseUrl + '/api/users/get-current');
     }
 
-    getAllUsers(){
+    getAllUsers() {
         return this.http.get(this.baseUrl + '/api/users/get-all');
     }
 
-    getDoctors(){
+    getDoctors() {
         return this.http.get(this.baseUrl + '/api/users/get-doctors');
     }
-    
-    blockUser(email){
+
+    blockUser(email) {
         return this.http.post(this.baseUrl + '/api/users/block/' + email, {});
     }
 
-    unBlockUser(email){
+    unBlockUser(email) {
         return this.http.post(this.baseUrl + '/api/users/unblock/' + email, {});
+    }
+
+    choseDoctor(doctor) {
+        return this.http.post(this.baseUrl + '/api/users/set-doctor', doctor);
     }
 }

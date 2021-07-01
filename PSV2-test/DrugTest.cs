@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PSV2.Controllers;
+using PSV2.Model;
 
 namespace PSV2_test
 {
@@ -7,27 +10,57 @@ namespace PSV2_test
     public class DrugTest
     {
         [TestMethod]
-        public void AddDrug(object input)
+        public async Task AddDrug()
         {
-            Assert.IsTrue(false);
+            DrugController controller = new DrugController();
+
+            Drugs drugs = new Drugs();
+
+            drugs.Name = "Hemomicin";
+
+            var result = await controller.AddDrug(drugs);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void DeleteById(int id)
+        public async Task DeleteById()
         {
-            Assert.IsTrue(false);
+            DrugController controller = new DrugController();
+
+            Drugs drugs = new Drugs();
+
+            drugs.Name = "Brufen";
+            drugs.Deleted = true;
+
+            var result = await controller.DeleteById(drugs.Id);
+
+            Assert.IsNotNull(result);
+
+            
         }
 
         [TestMethod]
-        public void GetById(int id)
+        public async Task GetById()
         {
-            Assert.IsTrue(false);
+            DrugController controller = new DrugController();
+
+            Drugs drugs = new Drugs();
+
+            drugs.Name = "Brufen";
+
+            var result = await controller.GetById(drugs.Id);
+
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public void GetAllDrugs()
         {
-            Assert.IsTrue(false);
+            DrugController controller = new DrugController();
+
+            PageResponse<Drugs> result = controller.GetAllDrugs(0,30, "");
+
+            Assert.AreEqual(result.Total, 2);
         }
     }
 }

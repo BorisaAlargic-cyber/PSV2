@@ -5,5 +5,7 @@ namespace PSV2.Model
     {
         public User Patient { get; set; }
         public string Speciality { get; set; }
+        public bool Taken { get; set; }
+        
     }
 }

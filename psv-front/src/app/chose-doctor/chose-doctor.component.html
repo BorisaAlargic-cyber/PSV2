@@ -5,7 +5,7 @@
             <form [formGroup]="choseDoctorForm" (submit)="submit()">
                 <mat-form-field appearance="fill">
                     <mat-label>Doctor</mat-label>
-                    <mat-select name='doctor'>
+                    <mat-select formControlName='doctor'>
                         <mat-option *ngFor="let doctor of doctors" value="{{doctor.id}}">
                             {{doctor.firstName}} {{doctor.lastName}}
                         </mat-option>

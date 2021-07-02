@@ -26,6 +26,10 @@ export class ApointmentService {
       return this.http.post(this.baseUrl + '/api/apointment/search-apointment-priorty', input);
    }
 
+   createInstruction(input) {
+      return this.http.post(this.baseUrl + '/api/instruction/create',input);
+   }
+
 
 
 

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApointmentService } from '../services/apointmentService';
 import { UserService } from '../services/userService';
+import { Router } from '@angular/router';
+
 
 export interface Apointment {
   paitent: string,
@@ -20,11 +22,13 @@ export class ApointmentListComponent implements OnInit {
 
   searchAppointmentForm: FormGroup;
   doctors;
+  user: any;
+
 
   elements: Apointment[] = []
   displayedColumns: string[] = ['patient', 'date', 'doctor', 'taken']
 
-  constructor(private apointmentService: ApointmentService, private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private apointmentService: ApointmentService, private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -35,6 +39,9 @@ export class ApointmentListComponent implements OnInit {
       doctor: [null, Validators.required],
       priority: [null, Validators.required],
     });
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
 
     this.apointmentService.getApointment().subscribe(data => {
       this.elements = data['entities'];
@@ -48,6 +55,12 @@ export class ApointmentListComponent implements OnInit {
 
       });
     })
+  }
+
+
+  toInstruction(id) {
+
+    this.router.navigate(['/create-instruction'], { queryParams: { id: id } });
   }
 
   takeApointment(event, element) {

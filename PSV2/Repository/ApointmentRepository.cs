@@ -34,5 +34,20 @@ namespace PSV2.Repository
         {
             return ModelContext.Apointments.Where(x => x.Doctor.Id == patient.ChoosenDoctor.Id).Include(x => x.Doctor).ToList();
         }
+
+        public List<Apointment> GetAllApointmentsForDoctor(User doctor)
+        {
+            return ModelContext.Apointments.Where(x => x.Doctor.Id == doctor.Id && x.Taken == true).Include(x => x.Patient).ToList();
+        }
+
+        public List<Apointment> GetAllNotTakenDoctors(User doctor)
+        {
+            return ModelContext.Apointments.Where(x => x.Doctor.Id == doctor.Id).Include(x => x.Patient).ToList();
+        }
+
+        public List<Apointment> LeftApointment(User user)
+        {
+            return ModelContext.Apointments.Where(x => x.Taken == false && x.Patient.Id == user.Id).ToList();
+        }
     }
 }

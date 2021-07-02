@@ -5,7 +5,7 @@ import { UserService } from '../services/userService';
 export interface User {
   firstName: string,
   lastName: string,
-  email : string,
+  email: string,
 };
 
 
@@ -17,14 +17,14 @@ export interface User {
 export class UserListComponent implements OnInit {
 
   elements: User[] = []
-  displayedColumns: string[] = ['firstName', 'lastName' , 'email' , 'block']
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'block']
 
 
 
-  constructor(private userService : UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(data => {
+    this.userService.blockinUsers().subscribe(data => {
       console.log(data)
       this.elements = data['entities'];
       console.log(data);
@@ -39,10 +39,11 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  unBlock(event, element){
-    this.userService.unBlockUser(element.email).subscribe(data =>{
+  unBlock(event, element) {
+    this.userService.unBlockUser(element.email).subscribe(data => {
       this.ngOnInit();
     })
   }
+
 
 }

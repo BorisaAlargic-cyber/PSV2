@@ -6160,7 +6160,7 @@
       "outputPath": "/Users/borisaalargic/Desktop/PSV2/PSV2/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/borisaalargic/.nuget/NuGet/NuGet.Config"
+        "/Users/borisaalargic/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

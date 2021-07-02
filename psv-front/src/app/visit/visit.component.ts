@@ -16,17 +16,13 @@ export interface Visit {
 export class VisitComponent implements OnInit {
 
   elements: Visit[] = []
-  displayedColumns: string[] = ['patient', 'termin' , 'results']
+  displayedColumns: string[] = ['doctor', 'patient', 'date', 'results']
 
   constructor(private visitService: VisitService) { }
 
   ngOnInit(): void {
-    this.visitService.getAllVists().subscribe(data =>{
+    this.visitService.getAllVists().subscribe(data => {
       this.elements = data['entities'];
-      console.log(data);
-    })
+    });
   }
-
-
-
 }

@@ -67,10 +67,17 @@
                 <th mat-header-cell *matHeaderCellDef> Taken </th>
                 <td mat-cell *matCellDef="let element">
                     <mat-card-actions>
-                        <button *ngIf="element.taken == false" (click)="takeApointment($event, element)"
-                            mat-raised-button color="primary">Take</button>
-                        <button *ngIf="element.taken == true" (click)="leaveApointment($event, element)"
-                            mat-raised-button color="primary">Leave</button>
+                        <div *ngIf="user.role == 'PATIENT'">
+                            <button *ngIf="element.taken == false" (click)="takeApointment($event, element)"
+                                mat-raised-button color="primary">Take</button>
+                            <button *ngIf="element.taken == true" (click)="leaveApointment($event, element)"
+                                mat-raised-button color="primary">Leave</button>
+                        </div>
+                        <div *ngIf="user.role == 'DOCTOR'">
+                            <button (click)="toInstruction(element.patient.id)" mat-raised-button
+                                color="primary">Instruction</button>
+                        </div>
+
                     </mat-card-actions>
                 </td>
 

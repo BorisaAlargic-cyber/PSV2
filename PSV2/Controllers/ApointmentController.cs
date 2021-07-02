@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -46,15 +47,49 @@ namespace PSV2.Controllers
                 using (var unitOfWork = new UnitOfWork(new ModelContext()))
                 {
                     User current = GetCurrentUser();
-                    if(current.FirstTime == true)
+                    if(current.Role == "PATIENT")
                     {
-                        List<Apointment> result = unitOfWork.Apointment.FirstTimeApointments(current);
+                        if (current.FirstTime == true)
+                        {
+                            List<Apointment> result = unitOfWork.Apointment.FirstTimeApointments(current);
 
 
-                        return new PageResponse<Apointment>(result, result.Count);
+                            return new PageResponse<Apointment>(result, result.Count);
+                        }
+
+                        List<Instruction> instructions = unitOfWork.Instruction.GetAllInstructionsForUser(current);
+                        List<Apointment> apointments = unitOfWork.Apointment.FirstTimeApointments(current);
+
+                        foreach(Instruction ins in instructions)
+                        {
+                            List<User> doctors = unitOfWork.Users.GetDoctorForSpeciality(ins);
+                            foreach(User doctor in doctors)
+                            {
+                                List<Apointment> doctorApointments = unitOfWork.Apointment.GetAllNotTakenDoctors(doctor);
+
+                                foreach (Apointment ap in doctorApointments)
+                                {
+                                    if (AppointmentExists(ap, apointments))
+                                    {
+                                        continue;
+                                    }
+
+                                    apointments.Add(ap);
+                                }
+
+                                
+                            }
+                        }
+
+                        return new PageResponse<Apointment>(apointments, apointments.Count);
+                    }
+                    else
+                    {
+                        List<Apointment> dbApointments = unitOfWork.Apointment.GetAllApointmentsForDoctor(current);
+
+                        return new PageResponse<Apointment>(dbApointments, dbApointments.Count);
                     }
 
-                    return unitOfWork.Apointment.GetPage(new Pager(page, perPage, search));
                 }
             }
             catch (Exception e)
@@ -62,6 +97,8 @@ namespace PSV2.Controllers
                 return null;
             }
         }
+
+
         [Route("/api/apointment/add")]
         [HttpPost]
         public async Task<IActionResult> CreateApointment(Apointment input)
@@ -121,17 +158,36 @@ namespace PSV2.Controllers
         public async Task<IActionResult> takeApointment(int id)
         {
             Apointment apointment = null;
-            User user = GetCurrentUser();
+           
             try
             {
                 using (var unitOfWork = new UnitOfWork(new ModelContext()))
                 {
+                    User user = unitOfWork.Users.Get(GetCurrentUser().Id);
+
                     user.FirstTime = false;
+                    unitOfWork.Complete();
+
                     apointment = unitOfWork.Apointment.Get(id);
                     apointment.Patient = unitOfWork.Users.Get(user.Id);
                     apointment.Taken = true;
                     unitOfWork.Apointment.Update(apointment);
+
+                   
                     unitOfWork.Complete();
+
+                    Visit visit = new Visit();
+                    visit.Deleted = false;
+                    visit.Results = string.Empty;
+
+                    unitOfWork.Visits.Add(visit);
+                    unitOfWork.Complete();
+
+                    unitOfWork.Visits.Update(visit);
+                    visit.Apointment = apointment;
+
+                    unitOfWork.Complete();
+
                 }
             }
             catch (Exception e)
@@ -140,6 +196,56 @@ namespace PSV2.Controllers
             }
 
             return Ok(apointment);
+        }
+
+        private bool AppointmentExists(Apointment apointment, List<Apointment> apointments)
+        {
+            foreach (Apointment ap in apointments)
+            {
+                if (ap.Id == apointment.Id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        [Authorize]
+        [Route("/api/apointments/count-left")]
+        [HttpPost]
+        public async Task<IActionResult> CountLeftApointments()
+        {
+            List<User> result = new List<User>();
+
+
+            try
+            {
+                using(UnitOfWork unitOfWork = new UnitOfWork(new ModelContext()))
+                {
+                    IEnumerable<User> users = unitOfWork.Users.GetAll();
+
+                    foreach (User user in users)
+                    {
+                        if (user.Role != "PATIENT")
+                        {
+                            continue;
+                        }
+
+                        List<Apointment> apointments = unitOfWork.Apointment.LeftApointment(user);
+
+                        if (apointments.Count >= 3)
+                        {
+                            result.Add(user);
+                        }
+                    }
+
+                    return Ok(result);
+                }
+            }catch(Exception ee)
+            {
+                return Ok(result);
+            }
         }
     }
 }

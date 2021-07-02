@@ -10,5 +10,11 @@ namespace PSV2.Core
         public List<Apointment> SearchApointmens(PriorityRequest priorityReq);
 
         public List<Apointment> FirstTimeApointments(User patient);
+
+        public List<Apointment> GetAllApointmentsForDoctor(User doctor);
+
+        public List<Apointment> GetAllNotTakenDoctors(User doctor);
+
+        public List<Apointment> LeftApointment(User user);
     }
 }

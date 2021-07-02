@@ -1,0 +1,18 @@
+<div id="instruction-page" class="page">
+    <div class="form-container">
+        <mat-card>
+            <h1>Instruction</h1>
+            <form [formGroup]="instructionForm" (submit)="submit()">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Speciality
+                    </mat-label>
+                    <input matInput formControlName="speciality" required>
+                </mat-form-field>
+
+            </form>
+            <mat-card-actions>
+                <button (click)="submit()" mat-raised-button type="submit" color="primary">Instruction</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

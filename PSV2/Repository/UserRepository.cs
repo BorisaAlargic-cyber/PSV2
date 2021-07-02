@@ -35,5 +35,18 @@ namespace PSV2.Repository
 
             return query.ToList();
         }
+
+        public List<User> GetDoctorForSpeciality(Instruction instruction)
+        {
+            return ModelContext.Users.Where(x => x.Speciality == instruction.Speciality).ToList();
+        }
+
+        public override IEnumerable<User> GetAll()
+        {
+            var query = ModelContext.Users.
+                Where(x => x.Deleted == false && x.Role == "PATIENT");
+
+            return query.ToList();
+        }
     }
 }

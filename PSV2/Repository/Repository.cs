@@ -83,5 +83,10 @@ namespace PSV2.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void Detach(TEntity entity)
+        {
+            Context.Entry(entity).State = EntityState.Detached;
+        }
     }
 }

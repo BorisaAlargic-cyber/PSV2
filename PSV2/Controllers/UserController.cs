@@ -20,9 +20,10 @@ namespace PSV2.Controllers
             {
                 using(UnitOfWork unitOfWork = new UnitOfWork(new ModelContext()))
                 {
-                    User user = GetCurrentUser();
+                    User user = unitOfWork.Users.Get(GetCurrentUser().Id);
+                    User doc = unitOfWork.Users.Get(doctor.Id);
                     unitOfWork.Users.Update(user);
-                    user.ChoosenDoctor = doctor;
+                    user.ChoosenDoctor = doc;
                     unitOfWork.Complete();
 
                     return Ok(user);

@@ -35,14 +35,14 @@ export class LoginComponent implements OnInit {
 
       this.userService.getUser().subscribe((data: any) => {
 
+        console.log('test', data.choosenDoctor, data.role)
 
-        if (!data.choosenDoctor && data.Role == 'PATIENT') {
+        if (data.choosenDoctor == null && data.role == 'PATIENT') {
           this.router.navigate(['/chose-doctor']);
           return;
         }
 
         localStorage.setItem('user', JSON.stringify(data));
-        console.log(data, "login");
 
         this.router.onSameUrlNavigation = 'reload';
         //this.router.navigate(['/home']);

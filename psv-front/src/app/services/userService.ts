@@ -36,4 +36,7 @@ export class UserService {
     choseDoctor(doctor) {
         return this.http.post(this.baseUrl + '/api/users/set-doctor', doctor);
     }
+    blockinUsers() {
+        return this.http.post(this.baseUrl + '/api/apointments/count-left', {});
+    }
 }

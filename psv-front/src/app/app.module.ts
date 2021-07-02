@@ -35,9 +35,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ApointmentListComponent } from './apointment-list/apointment-list.component';
 import { HomeComponent } from './home/home.component';
 import { ApointmentService } from './services/apointmentService';
+import { InstructionService } from './services/instructionService'
 import { TerminService } from './services/terminService';
 import { ChoseDoctorComponent } from './chose-doctor/chose-doctor.component';
 import { MatSelectModule } from '@angular/material/select';
+import { CreateInstructionComponent } from './create-instruction/create-instruction.component';
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import { MatSelectModule } from '@angular/material/select';
     ApointmentListComponent,
     HomeComponent,
     ChoseDoctorComponent,
+    CreateInstructionComponent,
 
   ],
   imports: [
@@ -71,7 +74,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     NgxMatTimepickerModule, MatDatepickerModule, NgxMatNativeDateModule,
   ],
-  providers: [UserService, TokenService, FeedBackService, VisitService, DrugService, ApointmentService, TerminService,
+  providers: [UserService, TokenService, FeedBackService, VisitService, DrugService, ApointmentService,
+    TerminService, InstructionService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

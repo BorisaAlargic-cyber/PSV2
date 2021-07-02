@@ -13,5 +13,7 @@ namespace PSV2.Core
         public User GetUserWithEmailAndPassword(string email, string password);
 
         public List<User> GetDoctors();
+
+        public List<User> GetDoctorForSpeciality(Instruction instruction);
     }
 }

@@ -6,6 +6,7 @@ import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { ApointmentListComponent } from './apointment-list/apointment-list.component';
 import { AppComponent } from './app.component';
 import { ChoseDoctorComponent } from './chose-doctor/chose-doctor.component';
+import { CreateInstructionComponent } from './create-instruction/create-instruction.component';
 import { DrugListComponent } from './drug-list/drug-list.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { HomeComponent } from './home/home.component';
@@ -26,7 +27,9 @@ const routes: Routes = [
   { path: 'add-drug', component: AddDrugComponent },
   { path: 'add-appointment', component: AddApointmentComponent },
   { path: 'apointments', component: ApointmentListComponent },
-  { path: 'chose-doctor', component: ChoseDoctorComponent }
+  { path: 'chose-doctor', component: ChoseDoctorComponent },
+  { path: 'create-instruction', component: CreateInstructionComponent },
+  { path: 'visits', component: VisitComponent }
 ];
 
 @NgModule({

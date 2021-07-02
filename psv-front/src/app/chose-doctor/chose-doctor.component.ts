@@ -34,7 +34,9 @@ export class ChoseDoctorComponent implements OnInit {
   submit() {
 
 
-    this.userService.choseDoctor(this.choseDoctorForm.value).subscribe(data => {
+    this.userService.choseDoctor({
+      id: parseInt(this.choseDoctorForm.controls['doctor'].value)
+    }).subscribe(data => {
       this.router.navigate(['/home']);
     })
   }
